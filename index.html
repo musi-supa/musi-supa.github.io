@@ -5,75 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Musi Supa Level Generator</title>
   <style>
-    /* Make the entire page fill the viewport and use a clean font */
-    html, body {
+    /* Base Reset */
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      height: 100%;
+    }
+
+    body {
       font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background-color: #f9f9f9;
-      color: #333;
+      min-height: 100vh;
+      padding: 2rem;
     }
 
-    /* Title styling */
     h1 {
-      margin-bottom: 30px;
       font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
 
-    /* Container for buttons */
     .button-container {
-      margin-bottom: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
     }
 
     button {
-      margin: 0 10px;
-      padding: 10px 20px;
+      padding: 0.75rem 1.5rem;
       font-size: 1rem;
       border: none;
-      border-radius: 4px;
-      cursor: pointer;
+      border-radius: 5px;
       background-color: #4CAF50;
       color: white;
-      transition: background-color 0.2s ease;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
       background-color: #45a049;
     }
 
-    /* The area where the random string appears */
     #output {
-      font-size: 2rem;       /* Relatively big text */
+      font-size: 1.5rem;
       text-align: center;
-      margin-top: 20px;
-      min-height: 3em;       /* Reserve some vertical space */
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      max-width: 90%;
+      word-wrap: break-word;
+    }
+
+    /* Responsive Typography */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+
+      #output {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Page title -->
   <h1>Musi Supa Level Generator</h1>
-
-  <!-- Three buttons -->
   <div class="button-container">
-    <button id="normalBtn">Normal mode</button>
-    <button id="hardBtn">Hard mode</button>
-    <button id="challengeBtn">Challenge mode</button>
+    <button id="normalBtn">Normal Mode</button>
+    <button id="hardBtn">Hard Mode</button>
+    <button id="challengeBtn">Challenge Mode</button>
   </div>
-
-  <!-- Where the chosen string will show up -->
   <div id="output"></div>
 
   <script>
-    // === Step 1: Define your three lists of strings (you can replace these examples) ===
     const normalList = [
    "101 Dalmatians",
    "Airbag",
@@ -5773,32 +5786,22 @@
       "The Thames River"
     ];
 
-    // === Step 2: Utility to pick a random element from an array ===
     function pickRandom(arr) {
-      const idx = Math.floor(Math.random() * arr.length);
-      return arr[idx];
+      return arr[Math.floor(Math.random() * arr.length)];
     }
 
-    // === Step 3: Grab references to buttons and output div ===
-    const normalBtn = document.getElementById("normalBtn");
-    const hardBtn = document.getElementById("hardBtn");
-    const challengeBtn = document.getElementById("challengeBtn");
     const outputDiv = document.getElementById("output");
 
-    // === Step 4: Attach click handlers ===
-    normalBtn.addEventListener("click", () => {
-      const chosen = pickRandom(normalList);
-      outputDiv.textContent = chosen;
+    document.getElementById("normalBtn").addEventListener("click", () => {
+      outputDiv.textContent = pickRandom(normalList);
     });
 
-    hardBtn.addEventListener("click", () => {
-      const chosen = pickRandom(hardList);
-      outputDiv.textContent = chosen;
+    document.getElementById("hardBtn").addEventListener("click", () => {
+      outputDiv.textContent = pickRandom(hardList);
     });
 
-    challengeBtn.addEventListener("click", () => {
-      const chosen = pickRandom(challengeList);
-      outputDiv.textContent = chosen;
+    document.getElementById("challengeBtn").addEventListener("click", () => {
+      outputDiv.textContent = pickRandom(challengeList);
     });
   </script>
 </body>
